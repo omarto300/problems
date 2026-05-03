@@ -1,7 +1,6 @@
 package omar.codility.exercises;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +24,14 @@ public class BInaryGap {
             System.out.println(matcher.group(1));
             gaps.add(matcher.group(1));
         }
-        int sizeMaxGap= gaps.stream().max(Comparator.comparingInt(String::length)).orElseGet(()->"").length() -2;
-        return Math.max(sizeMaxGap, 0);
+
+        int mayor = 0;
+        for(String gap : gaps) {
+            if(mayor < gap.length()) {
+                mayor = gap.length();
+            }
+        }
+
+        return Math.max(mayor - 2 , 0);
     }
 }
